@@ -10,7 +10,7 @@ Base.metadata.create_all(bind=engine)
 
 app=FastAPI(title="Salarite HR Workspace API",version="2.0.0",description="JWT-authenticated task management and interview scheduling.")
 
-origins=[x.strip() for x in os.getenv("FRONTEND_ORIGIN","http://localhost:3000").split(",") if x.strip()]
+origins=[x.strip() for x in os.getenv("FRONTEND_ORIGIN","https://salarite-task-management-frontend.vercel.app").split(",") if x.strip()]
 app.add_middleware(CORSMiddleware,allow_origins=origins,allow_credentials=True,allow_methods=["GET","POST","PATCH","PUT","DELETE","OPTIONS"],allow_headers=["*"])
 
 @app.get("/health",tags=["Health"])
