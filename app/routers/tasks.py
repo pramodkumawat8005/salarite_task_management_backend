@@ -39,6 +39,8 @@ def list_tasks(status:str|None=None, priority:str|None=None, search:str|None=Que
         q=q.filter(models.Task.priority==priority)
     if assignee_id and user.role=="employer": 
         q=q.filter(models.Task.assignee_id==assignee_id)
+    if user.role == "employer":
+        q = q.filter(models.Task.created_by_id == user.id)    
     if search:
         term=f"%{search.strip()}%"; 
         q=q.filter(or_(models.Task.title.ilike(term),models.Task.description.ilike(term)))
